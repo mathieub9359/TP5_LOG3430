@@ -28,3 +28,11 @@ jobs:
           python server.py &
           echo "Waiting for Flask server to start"
           sleep 30
+
+      - name: Run Locust load tests
+        run: |
+          locust --headless \
+                  -u 10000 \
+                  -r 100 \
+                  --host http://127.0.0.1:5000 \
+                  --run-time 2m
